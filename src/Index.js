@@ -1,37 +1,37 @@
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import React, { Component } from 'react';
+import { Platform, StyleSheet, Text, View } from 'react-native';
 
 import { AsyncStorage } from 'react-native';
 
 import createNavigator from 'routes';
 
 
-export default class App extends Component{
+export default class App extends Component {
   state = {
     userChecked: false,
     userLogged: false,
   };
 
-  async componentDidMount(){
-    //await AsyncStorage.clear();
+async componentDidMount() {
+  //await AsyncStorage.clear();
 
-    const username = await AsyncStorage.getItem('@Githuber:username');
+  const username = await AsyncStorage.getItem('@Githuber:username');
 
-    this.appLoaded(username);
-  }
+  this.appLoaded(username);
+}
 
-  appLoaded = (username) => {
-    this.setState({ userChecked: true,
-      userLogged : !!username,
-    });
-  }
-  render(){
-    if (!this.state.userChecked) return null;
+appLoaded = (username) => {
+  this.setState({ userChecked: true,
+    userLogged : !!username,
+  });
+}
+render(){
+  if (!this.state.userChecked) return null;
 
-    const Routes  = createNavigator(this.state.userLogged);
+  const Routes  = createNavigator(this.state.userLogged);
 
-    return <Routes />;
-  }
+  return <Routes />;
+}
 }
 
 const styles = StyleSheet.create({
